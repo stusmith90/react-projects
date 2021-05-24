@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Questions from './components/Questions';
-
 import questions from './questions.json';
+import { GlobalContext } from './context/AppContext';
 
 function App() {
-  let currentQuestion = 0
+  const {counter}: any = useContext(GlobalContext);
+  const [count] = counter;
   return (
     <div className="quiz">
       <div className="quiz__container">
-        <Questions questions={questions[currentQuestion]} />
-    </div>
+        <Questions questions={questions[count]} />
+      </div>
     </div>
   );
 }
