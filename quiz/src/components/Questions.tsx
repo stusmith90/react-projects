@@ -14,6 +14,7 @@ const Questions = ({ questions }: Iprops) => {
   const handleSubmit = (e : any) => {
     e.preventDefault();
     e.target.reset();
+    setAnswer("");
 
     setCount(count + 1);
     if (questions.correct === answer) {
@@ -23,7 +24,7 @@ const Questions = ({ questions }: Iprops) => {
 
   return (
     <>
-      <h2 id="question">{questions.question}</h2>
+      <h2 id="question-header">{questions.question}</h2>
       <form onSubmit={handleSubmit}>
         <ul>
           <li>
@@ -67,7 +68,7 @@ const Questions = ({ questions }: Iprops) => {
             <label id="d_text">{questions.d}</label>
           </li>
         </ul>
-        <input type="submit" value="Submit" />
+        <button type="submit" value="Submit">Submit</button>
       </form>
     </>
   );
