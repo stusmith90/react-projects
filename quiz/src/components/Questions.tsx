@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../context/AppContext';
 
-type Iprops = {
+interface Iprops {
   [questions: string]: any;
 };
 
@@ -24,7 +24,7 @@ const Questions = ({ questions }: Iprops) => {
   return (
     <>
       <h2 id="question">{questions.question}</h2>
-      <form onSubmit={handleSubmit} noValidate={false}>
+      <form onSubmit={handleSubmit}>
         <ul>
           <li>
             <input
