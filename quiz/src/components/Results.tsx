@@ -10,7 +10,7 @@ const Results = ({ total }: IProps) => {
   const [result] = results;
   return (
     <div>
-      <h1>Results:</h1>
+      <h2>Results:</h2>
       <p>
         You scored a total {result} out of {total}
       </p>
