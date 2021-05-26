@@ -15,8 +15,8 @@ const Questions = ({ questions }: Iprops) => {
     e.preventDefault();
     e.target.reset();
     setAnswer("");
-
     setCount(count + 1);
+
     if (questions.correct === answer) {
       setResult(result + 1);
     }
@@ -33,6 +33,7 @@ const Questions = ({ questions }: Iprops) => {
               type="radio"
               id="a"
               name="answer"
+              aria-labelledby="a_text"
               onChange={(e) => setAnswer(e.target.value)}
             ></input>
             <label id="a_text">{questions.a}</label>
@@ -43,6 +44,7 @@ const Questions = ({ questions }: Iprops) => {
               type="radio"
               id="b"
               name="answer"
+              aria-label="cost-input"
               onChange={(e) => setAnswer(e.target.value)}
             ></input>
             <label id="b_text">{questions.b}</label>
@@ -53,6 +55,7 @@ const Questions = ({ questions }: Iprops) => {
               type="radio"
               id="c"
               name="answer"
+              aria-label="cost-input"
               onChange={(e) => setAnswer(e.target.value)}
             ></input>
             <label id="c_text">{questions.c}</label>
@@ -63,6 +66,7 @@ const Questions = ({ questions }: Iprops) => {
               type="radio"
               id="d"
               name="answer"
+              aria-label="cost-input"
               onChange={(e) => setAnswer(e.target.value)}
             ></input>
             <label id="d_text">{questions.d}</label>
