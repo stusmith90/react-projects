@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import '@testing-library/jest-dom/extend-expect';
@@ -18,9 +18,9 @@ const setup = (counter:number, results:number) => {
 
 test('Testing the first questions loads', () => {
   const wrapper = setup(0, 0);
-  render(<App />, { wrapper });
+  const utils = render(<App />, { wrapper });
   expect(
-    screen.getByText('What is the most used programming language in 2019?')
+    utils.getByText('What is the most used programming language in 2019?')
   ).toBeInTheDocument();
 });
 
