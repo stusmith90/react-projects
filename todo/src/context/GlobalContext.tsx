@@ -1,35 +1,41 @@
-
 import React, { createContext, useReducer } from 'react';
-import { counters } from './reducers';
+import { reducers } from './reducers';
+
+import { TodoActions } from './reducers';
+
+type stateAttr = {
+  id: number;
+  text: string;
+};
 
 type InitialStateType = {
-  counter: number;
-}
+  todos: stateAttr[];
+};
 
 const initialState = {
-  counter: 0,
-}
+  todos: [],
+};
 
 const AppContext = createContext<{
   state: InitialStateType;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<TodoActions>;
 }>({
   state: initialState,
-  dispatch: () => null
+  dispatch: () => null,
 });
 
-const mainReducer = ({ counter }: InitialStateType, action: any) => ({
-  counter: counters(counter, action),
+const mainReducer = ({ todos }: InitialStateType, action: TodoActions) => ({
+  todos: reducers(todos, action),
 });
 
 const AppProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
 
   return (
-    <AppContext.Provider value={{state, dispatch}}>
+    <AppContext.Provider value={{ state, dispatch }}>
       {children}
     </AppContext.Provider>
-  )
-}
+  );
+};
 
 export { AppContext, AppProvider };
