@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/GlobalContext';
 import { Types } from "../context/reducers";
-const Search = () => {
 
+const Search = () => {
     const { state, dispatch } = useContext(AppContext);
 
     const add = (e: React.KeyboardEvent) => {
@@ -13,6 +13,7 @@ const Search = () => {
             payload: {
               id: state.todos?.length,
               text: target.value,
+              completed: false
             }
           });
         }
