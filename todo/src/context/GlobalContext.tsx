@@ -6,6 +6,7 @@ import { TodoActions } from './reducers';
 type stateAttr = {
   id: number;
   text: string;
+  completed: boolean;
 };
 
 type InitialStateType = {
@@ -29,6 +30,7 @@ const mainReducer = ({ todos }: InitialStateType, action: TodoActions) => ({
 });
 
 const AppProvider: React.FC = ({ children }) => {
+// @ts-ignore
   const [state, dispatch] = useReducer(mainReducer, initialState);
 
   return (
