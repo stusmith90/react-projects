@@ -1,43 +1,64 @@
 import React, { createContext, useReducer } from 'react';
-import { reducers } from './reducers';
+import types, { Action } from './types';
 
-import { TodoActions } from './reducers';
-
-type stateAttr = {
+type ProductType = {
   id: number;
   text: string;
   completed: boolean;
 };
 
-type InitialStateType = {
-  todos: stateAttr[];
+type State = {
+  todos: ProductType[];
+  filter: string;
 };
 
 const initialState = {
   todos: [],
+  filter: 'all',
 };
 
-const AppContext = createContext<{
-  state: InitialStateType;
-  dispatch: React.Dispatch<TodoActions>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
+interface ContextProps {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+}
 
-const mainReducer = ({ todos }: InitialStateType, action: TodoActions) => ({
-  todos: reducers(todos, action),
-});
+const AppContext = createContext({} as ContextProps);
 
-const AppProvider: React.FC = ({ children }) => {
-// @ts-ignore
-  const [state, dispatch] = useReducer(mainReducer, initialState);
+const { Provider } = AppContext;
 
-  return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AppContext.Provider>
+const AppProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
+  const [state, dispatch] = useReducer(
+    (state: State, action: Action) => {
+      switch (action.type) {
+        case types.ADD:
+          return { ...state, todos: [...state.todos, action.payload] };
+        case types.DELETE:
+          return {
+            ...state,
+            todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+          };
+        case types.COMPLETE:
+          state.todos[action.payload.id].completed = action.payload.completed;
+          return { ...state };
+        case types.FILTER:
+          return { ...state, filter: action.payload.filter };
+          case types.CLEAR:
+          return {
+            ...state,
+            todos: state.todos.filter((todo) => todo.completed !== true),
+          };
+        default:
+          return state;
+      }
+    },
+    initialState
   );
+
+  return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
 export { AppContext, AppProvider };

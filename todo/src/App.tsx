@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Filter from './components/Filter';
 import List from './components/List';
 import Search from './components/Search';
 
@@ -9,6 +10,7 @@ function App() {
       <h1>TODOS</h1>
       <Search />
       <List />
+      <Filter />
     </div>
   );
 }
