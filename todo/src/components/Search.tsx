@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context/GlobalContext';
-import { Types } from "../context/reducers";
+import { AppContext } from '../context/globalContext';
+import types from "../context/types";
 
 const Search = () => {
     const { state, dispatch } = useContext(AppContext);
@@ -9,11 +9,11 @@ const Search = () => {
         if(e.key === 'Enter'){
         const target = e.target as HTMLTextAreaElement;
         dispatch({
-            type: Types.Add,
+            type: types.ADD,
             payload: {
               id: state.todos?.length,
               text: target.value,
-              completed: false
+              completed: false,
             }
           });
         }
